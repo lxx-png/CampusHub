@@ -21,8 +21,18 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install pytest
+        pip install pytest ruff
 
+    # 👇 在这里加（代码风格检查）
+    - name: Lint (ruff)
+      run: |
+        ruff check .
+
+    # 👇 原来的测试
     - name: Run tests
       run: |
         pytest
+
+
+
+        
