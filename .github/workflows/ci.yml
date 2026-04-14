@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [dev, feature/*]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install pytest ruff
+
+    # 👇 在这里加（代码风格检查）
+    - name: Lint (ruff)
+      run: |
+        ruff check .
+
+    # 👇 原来的测试
+    - name: Run tests
+      run: |
+        pytest
+
+
+
+        
